@@ -370,20 +370,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log("Download clicked. Current Target:", currentTarget);
 
     if (currentTarget.type === "folder") {
-      const selectedIds = getSelectedIds(currentTarget.folderTree);
-      console.log("Selected IDs for folder download:", selectedIds);
+      const selectedFiles = flattenFiles(currentTarget.folderTree).filter(f => f.selected);
+      console.log("Selected files for folder download:", selectedFiles);
 
-      if (selectedIds.length === 0) {
+      if (selectedFiles.length === 0) {
         statusLabel.innerText = "No files selected.";
         return;
       }
-      statusLabel.innerText = "Downloading " + selectedIds.length + " files...";
+      statusLabel.innerText = "Downloading " + selectedFiles.length + " files...";
       downloadBtn.disabled = true;
-      for (const item of selectedIds) {
+      for (const item of selectedFiles) {
         if (item.type === 'file') {
           const downloadUrl = `https://drive.google.com/uc?id=${item.id}&export=download`;
-          console.log("Triggering download for folder item:", item.name, downloadUrl);
-          startDownload(downloadUrl, item.name);
+          console.log("Triggering download for folder item:", item.path, downloadUrl);
+          startDownload(downloadUrl, item.path);
           await new Promise(r => setTimeout(r, 500));
         }
       }
