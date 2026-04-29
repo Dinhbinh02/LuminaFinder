@@ -1,6 +1,6 @@
 # 📂 LuminaFinder
 
-![LuminaFinder Hero](hero.png)
+![LuminaFinder Banner](banner.png)
 
 **LuminaFinder** is a lightweight, high-performance Chrome Extension designed to streamline your Google Drive and Google Docs experience. It provides a minimalist, unified interface for scanning folders and downloading files with advanced features like parallel processing and export format selection.
 
