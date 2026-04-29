@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (cache.lastState && cache.lastState.url === currentUrl) {
     currentTarget = cache.lastState;
     if (currentTarget.type === "folder") {
-      statusLabel.innerText = "Restored.";
       renderState();
     } else {
       analyzeUrl(currentUrl, tab);
@@ -58,6 +57,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   } else {
     analyzeUrl(currentUrl, tab);
   }
+
+  // Poll background status every second
+  setInterval(() => {
+    chrome.runtime.sendMessage({ type: 'GET_DOWNLOAD_STATUS' }, response => {
+      if (response && response.isProcessing) {
+        statusLabel.innerText = `Downloading ${response.progress.current}/${response.progress.total}: ${response.progress.lastFileName}`;
+        downloadBtn.disabled = true;
+      } else if (downloadBtn.disabled && currentTarget.type === 'folder' && !currentTarget.isScanning) {
+        statusLabel.innerText = "Complete.";
+        downloadBtn.disabled = false;
+        updateDownloadBtnState();
+      }
+    });
+  }, 1000);
 
   async function analyzeUrl(url, tabObj) {
     console.log("Analyzing URL:", url);
@@ -371,24 +384,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (currentTarget.type === "folder") {
       const selectedFiles = flattenFiles(currentTarget.folderTree).filter(f => f.selected);
-      console.log("Selected files for folder download:", selectedFiles);
-
       if (selectedFiles.length === 0) {
         statusLabel.innerText = "No files selected.";
         return;
       }
-      statusLabel.innerText = "Downloading " + selectedFiles.length + " files...";
-      downloadBtn.disabled = true;
-      for (const item of selectedFiles) {
-        if (item.type === 'file') {
-          const downloadUrl = `https://drive.google.com/uc?id=${item.id}&export=download`;
-          console.log("Triggering download for folder item:", item.path, downloadUrl);
-          startDownload(downloadUrl, item.path);
-          await new Promise(r => setTimeout(r, 500));
-        }
-      }
-      statusLabel.innerText = "Download triggered.";
-      downloadBtn.disabled = false;
+      
+      chrome.runtime.sendMessage({ type: 'START_DOWNLOAD_QUEUE', files: selectedFiles }, response => {
+        statusLabel.innerText = "Processing in background...";
+        downloadBtn.disabled = true;
+      });
     } else {
       const val = optionSelect.value;
       console.log("Export option selected:", val);
