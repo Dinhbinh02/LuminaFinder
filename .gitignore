@@ -1,0 +1,16 @@
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# Extensions
+*.crx
+*.pem
+
+# Local Config
+.env
+local_config.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

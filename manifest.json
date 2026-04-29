@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Lumina Social Toolkit",
+  "short_name": "Lumina Social",
+  "version": "1.1",
+  "description": "Google Drive video and file downloader.",
+  "permissions": [
+    "storage",
+    "cookies",
+    "activeTab",
+    "tabs",
+    "downloads"
+  ],
+  "host_permissions": [
+    "*://drive.google.com/*",
+    "*://docs.google.com/*",
+    "*://drive.usercontent.google.com/*",
+    "*://*.googleusercontent.com/*",
+    "*://*.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

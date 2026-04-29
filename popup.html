@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Lumina Finder</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Lumina Finder</h1>
+    <div id="main-toolbar" class="toolbar">
+      <div id="select-all-group" class="checkbox-group" style="display: none;">
+        <input type="checkbox" id="select-all-checkbox" checked>
+        <label for="select-all-checkbox">Select all</label>
+      </div>
+      <button id="reload-btn" class="icon-btn" title="Reload"></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="target-header">
+        <h2 id="target-title">Wait...</h2>
+        <div id="target-type" class="type-badge">NONE</div>
+      </div>
+      
+      <div id="folder-content" class="folder-list" style="display: none;">
+        <div id="file-list-container"></div>
+      </div>
+    </section>
+
+    <section id="option-section" class="options-panel" style="display: none;">
+      <select id="option-select"></select>
+    </section>
+
+    <div class="status-bar">
+      <p id="status">Scanning...</p>
+    </div>
+
+    <div class="btn-group">
+      <button id="download-btn" disabled>Download</button>
+      <button id="copy-btn" class="secondary-btn">Metadata</button>
+    </div>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>
