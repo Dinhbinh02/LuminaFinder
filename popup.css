@@ -262,3 +262,22 @@ input[type="checkbox"] {
   text-align: center;
   margin-bottom: 12px;
 }
+
+.bulk-tip {
+  margin-top: 16px;
+  padding: 10px 12px;
+  background: #fdf2f2;
+  border: 1px solid #fee2e2;
+  border-radius: var(--radius);
+}
+
+.bulk-tip p {
+  font-size: 11px;
+  color: #991b1b;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.bulk-tip b {
+  font-weight: 600;
+}
