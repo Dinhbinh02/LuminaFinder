@@ -1,15 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Lumina Social Toolkit",
-  "short_name": "Lumina Social",
-  "version": "1.1",
-  "description": "Google Drive video and file downloader.",
+  "name": "Lumina Finder",
+  "short_name": "Lumina Finder",
+  "version": "1.2",
+  "description": "Browse, navigate and download files from Google Drive — including view-only protected documents.",
   "permissions": [
     "storage",
     "cookies",
     "activeTab",
     "tabs",
-    "downloads"
+    "downloads",
+    "debugger",
+    "offscreen"
   ],
   "host_permissions": [
     "*://drive.google.com/*",
